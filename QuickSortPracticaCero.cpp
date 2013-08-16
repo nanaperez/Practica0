@@ -1,9 +1,11 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 FILE *archivo;
 char caracter;
+int ini, fin, t; 
 
 void lecturaarchivo(){
   archivo = fopen("1.txt","r");
@@ -19,6 +21,10 @@ void lecturaarchivo(){
 }
 
 int main(){
+  ini = clock();
   lecturaarchivo();
+  fin = clock();
+  t=(fin-ini)/100000;
+  printf("\n\nEl tiempo de ejecucion  es de: %d segundos\n",t);
   return 0;
 }
