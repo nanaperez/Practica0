@@ -1,6 +1,6 @@
 #include <iostream>//Iniciación de c++
 #include <stdio.h>//
-#include <stdlib.h>//INcliur todas las librerias de c++ //consultar
+#include <stdlib.h>//Incluir todas las librerias de c++ //consultar
 #include <time.h>//Libreria que me permie
 #include <string> 
 #include <vector>
