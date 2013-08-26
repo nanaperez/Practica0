@@ -38,7 +38,7 @@ void OrdHeap(){
 
 vector <string> leer_archivo()
 {
-  freopen("2.txt","r",stdin);
+  freopen("1.txt","r",stdin);
   string x;
   vector <string> v;
   while(cin >> x) v.push_back(x);

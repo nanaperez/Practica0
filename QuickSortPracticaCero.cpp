@@ -1,18 +1,19 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <alloca.h>
-#include <cstring>
-using namespace std;
-int ini, fin;
-vector <string> v;
+#include <iostream> //Provee los elementos fundamentales para la entrada y salida en C++, es decir su inicializacion
+#include <stdio.h> //Libreria que contiene tipos, macros y funciones para la realización de las diferentes tareas
+#include <stdlib.h> //Libreria que contiene tipos, macros y funciones para la conversión numérica, generación de números aleatorios, búsquedas y ordenación, gestión de memoria y similares
+#include <time.h> //Libreria que contiene tipos, macros y funciones para la la manipulación de información sobre tiempos
+#include <string> //Incluye contenedores tipo string para trabajar con cadenas de caracteres
+#include <vector> //Incluye contenedores tipo vector, es decir, un arreglo dinamico
+#include <sstream> //Flujos hacia/desde cadenas alfanuméricas
+// #include <alloca.h> //Algo con memoria
+#include <cstring> //Define funciones para manipular strings y arreglos
+using namespace std; //Espacios de nombres, es decir, nombres de funciones 
+int ini, fin; //Variables para el inicio y fin del reloj
+vector <string> v; //Funcion vector creada con varaibles strings para recibir los archivos a ordenar
 
 // Función para dividir el array y hacer los intercambios    
-int divide(int start, int end) {
+int divide(int start, int end) 
+{
     int left;
     int right;
     string pivot;
@@ -23,17 +24,21 @@ int divide(int start, int end) {
     right = end;
  
     // Mientras no se cruzen los índices
-    while (left < right) {
-        while (v[right] > pivot) {
+    while (left < right) 
+    {
+        while (v[right] > pivot) 
+	{
             right--;
         }
  
-        while ((left < right) && (v[left] <= pivot)) {
+        while ((left < right) && (v[left] <= pivot)) 
+	{
             left++;
         }
  
         // Si todavía no se cruzan los indices seguimos intercambiando
-        if (left < right) {
+        if (left < right)
+	{
             temp = v[left];
             v[left] = v[right];
             v[right] = temp;
@@ -54,9 +59,16 @@ void OrdQuick(int start, int end)
 {
     int pivot;
  
+<<<<<<< HEAD
     if (start < end) {
       pivot = divide(start, end);
  
+=======
+    if (0 < end) 
+    {
+        pivot = divide(start, end);
+
+>>>>>>> 00bbeb44819b9419979fd3642ef8d2eb53178505
         // Ordeno la lista de los menores
         OrdQuick(start, pivot);
  
@@ -65,17 +77,17 @@ void OrdQuick(int start, int end)
     }
 }
 
-vector <string> leer_archivo()
+vector <string> leer_archivo() //Metodo que se encarga de solo lectura de los archivos .txt
 {
-  freopen("1.txt","r",stdin);
+  freopen("1.txt","r",stdin); //Esta funcion abre un fichero para escritura/reescritura. El parametro es el fichero a abrir, la funcion que se va a cumplir y la accion
   string x;
   vector <string> v;
   while(cin >> x) v.push_back(x);
   return v;
 }
 
-int main(){
-  
+int main() //Metodo principal que se encarga de ejecutar todos los metodos anteriores
+{  
   ini = clock();
   v = leer_archivo();
   OrdQuick(0, v.size()-1);
@@ -86,10 +98,10 @@ int main(){
   double seg = mil / (double) CLOCKS_PER_SEC;
   double min = seg / 60;
   double hor = min / 60;
-  cout << "\n\nEl tiempo de ejecución es de: " << mil << " Milisegundos." << endl;
-  cout << "El tiempo de ejecución es de: " << seg << " segundos." << endl;
-  cout << "El tiempo de ejecución es de: " << min << " minutos." << endl;
-  cout << "El tiempo de ejecución es de: " << hor << " horas." << endl;
-  cout << "Cantidad de palabras: " << v.size() << endl;
+  cout << "\n\nEl tiempo de ejecución es de: " << mil << " Milisegundos." << endl; //Muestra el tiempo de ejecucion en milisegundos
+  cout << "El tiempo de ejecución es de: " << seg << " segundos." << endl; //Muesra el tiempo de ejecucion en segundos
+  cout << "El tiempo de ejecución es de: " << min << " minutos." << endl; //Muestra el tiempo de ejecucion en minutos
+  cout << "El tiempo de ejecución es de: " << hor << " horas." << endl; //Muestra el tiempo de ejecucion en horas
+  cout << "Cantidad de palabras: " << v.size() << endl; //Muestra la cantidad de palabras ordenadas
   return 0;
 }
