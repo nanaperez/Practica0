@@ -4,16 +4,19 @@
 #include <time.h>
 #include <string>
 #include <vector>
+#include <sstream>
+#include <alloca.h>
+#include <cstring>
 using namespace std;
 int ini, fin;
 vector <string> v;
 
-// Función para dividir el array y hacer los intercambios
-int divide(vector *v, int start, int end) {
+// Función para dividir el array y hacer los intercambios    
+int divide(int start, int end) {
     int left;
     int right;
-    int pivot;
-    int temp;
+    string pivot;
+    string temp;
  
     pivot = v[start];
     left = start;
@@ -33,7 +36,7 @@ int divide(vector *v, int start, int end) {
         if (left < right) {
             temp = v[left];
             v[left] = v[right];
-            array[right] = temp;
+            v[right] = temp;
         }
     }
  
@@ -47,24 +50,24 @@ int divide(vector *v, int start, int end) {
 }
  
 // Función recursiva para hacer el ordenamiento
-void OrdQuick(vector v[], int start, int end)
+void OrdQuick(int start, int end)
 {
     int pivot;
  
     if (0 < end) {
-      pivot = divide(v[], start, end);
+      pivot = divide(start, end);
  
         // Ordeno la lista de los menores
-        OrdQuick(v[], start, end);
+        OrdQuick(start, end);
  
         // Ordeno la lista de los mayores
-        OrdQuick(v[], pivot + 1, end);
+        OrdQuick(pivot + 1, end);
     }
 }
 
 vector <string> leer_archivo()
 {
-  freopen("2.txt","r",stdin);
+  freopen("1.txt","r",stdin);
   string x;
   vector <string> v;
   while(cin >> x) v.push_back(x);
@@ -72,12 +75,12 @@ vector <string> leer_archivo()
 }
 
 int main(){
+  
   ini = clock();
   v = leer_archivo();
-  OrdQuick(v[], 0, v.size()-1);
-  //OrdQuick();
+  OrdQuick(0, v.size()-1);
   fin = clock();
-  for (int i = 0; i<v.size(); ++i)
+  for (int i = 0; i < v.size()-1; ++i)
     cout << v[i] << endl;
   int mil = fin-ini;
   double seg = mil / (double) CLOCKS_PER_SEC;

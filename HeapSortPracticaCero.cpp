@@ -26,7 +26,7 @@ int main(){
   v = leer_archivo();
   OrdHeap();
   fin = clock();
-  for (int i = 0; i<v.size(); ++i)
+  for (int i = 0; i<v.size(); i++)
     cout << v[i] << endl;
   int mil = fin-ini;
   double seg = mil / (double) CLOCKS_PER_SEC;
