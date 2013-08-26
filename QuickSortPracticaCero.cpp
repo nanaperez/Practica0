@@ -59,16 +59,15 @@ void OrdQuick(int start, int end)
 {
     int pivot;
  
-<<<<<<< HEAD
+
     if (start < end) {
       pivot = divide(start, end);
- 
-=======
-    if (0 < end) 
+	}
+
+    if (start < end) 
     {
         pivot = divide(start, end);
 
->>>>>>> 00bbeb44819b9419979fd3642ef8d2eb53178505
         // Ordeno la lista de los menores
         OrdQuick(start, pivot);
  
