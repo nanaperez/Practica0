@@ -54,11 +54,11 @@ void OrdQuick(int start, int end)
 {
     int pivot;
  
-    if (0 < end) {
+    if (start < end) {
       pivot = divide(start, end);
  
         // Ordeno la lista de los menores
-        OrdQuick(start, end);
+        OrdQuick(start, pivot);
  
         // Ordeno la lista de los mayores
         OrdQuick(pivot + 1, end);
