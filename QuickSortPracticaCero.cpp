@@ -78,7 +78,7 @@ void OrdQuick(int start, int end)
 
 vector <string> leer_archivo() //Metodo que se encarga de solo lectura de los archivos .txt
 {
-  freopen("1.txt","r",stdin); //Esta funcion abre un fichero para escritura/reescritura. El parametro es el fichero a abrir, la funcion que se va a cumplir y la accion
+  freopen("4.txt","r",stdin); //Esta funcion abre un fichero para escritura/reescritura. El parametro es el fichero a abrir, la funcion que se va a cumplir y la accion
   string x;
   vector <string> v;
   while(cin >> x) v.push_back(x);
