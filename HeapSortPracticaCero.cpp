@@ -1,65 +1,74 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string>
-#include <vector>
-using namespace std;
-int ini, fin;
-vector <string> v; 
+#include <iostream> //Provee los elementos fundamentales para la entrada y salida en C++, es decir su inicializacion
+#include <stdio.h> //Libreria que contiene tipos, macros y funciones para la realización de las diferentes tareas
+#include <stdlib.h> //Libreria que contiene tipos, macros y funciones para la conversión numérica, generación de números aleatorios, búsquedas y ordenación, gestión de memoria y similares
+#include <time.h> //Libreria que contiene tipos, macros y funciones para la la manipulación de información sobre tiempos
+#include <string> //Incluye contenedores tipo string para trabajar con cadenas de caracteres
+#include <vector> //Incluye contenedores tipo vector, es decir, un arreglo dinamico
+#include <sstream> //Flujos hacia/desde cadenas alfanuméricas
+// #include <alloca.h> //Algo con memoria
+#include <cstring> //Define funciones para manipular strings y arreglos
+#include <cmath>
+using namespace std; //Espacios de nombres, es decir, nombres de funciones 
+int ini, fin; //Variables para el inicio y fin del reloj
+vector <string> v; //Funcion vector creada con varaibles strings para recibir los archivos a ordenar
 
-void OrdHeap(){
-	if(n==0)return;
-    int i,k,v,h,j;
-    for(i=n/2;i>0;i--) //we start at i=n/2 as it gives index of right most sub-tree's parent
-    {
-        k=i;
-        v=a[k];        //this assigns the value of parent node of the sub-tree under consideration to variable v
-        h=0;
-        while(!h&&2*k<=n) //checking whether array is heapified
-        {
-            j=2*k;
-            if(j<n)          //checking if given sub-tree has 2 children
-            {
-                if(a[j]<a[j+1])j++;  //variable j points to higher valued node between the 2 children
-            }
-            if (v>=a[j])  //if parent node of the sub-tree is >= to the greater child, no need to heapify
-                h=1;
-            else               //else swap contents of parent and child using variables k and j
-            {
-                a[k]=a[j]; 
-                k=j;
-            }
-        }
-        a[k]=v;
-    }
-    maxd();
+void maxHeapify(vector<string>& v, int i, int heapSize) {
+  int l = 2 * i;
+  int r = 2 * i + 1;
+  int largest;
+  if(l <= heapSize && v[l] > v[i]) 
+    largest = l;
+  else
+    largest = i;
+
+  if(r <= heapSize && v[r] > v[largest])
+    largest = r;
+
+  if(largest != i) {
+    swap(v[i], v[largest]);
+    maxHeapify(v, largest, heapSize);   
+  }
 }
 
-vector <string> leer_archivo()
+void buildMaxHeap(vector<string>& v, int heapSize) {
+  for(int i = floor(v.size()-1 / 2); i >= 1; i--)
+    maxHeapify(v, i, heapSize);
+}
+
+void heapSort(vector<string>& v) {
+  int heapSize = v.size() - 1; 
+  buildMaxHeap(v, heapSize);
+  for(int i = v.size()-1; i>=2; i--) {
+    swap(v[1], v[i]);
+    heapSize--;
+    maxHeapify(v, 1, heapSize);
+  }
+}
+
+vector <string> leer_archivo() //Metodo que se encarga de solo lectura de los archivos .txt
 {
-  freopen("1.txt","r",stdin);
+  freopen("4.txt","r",stdin); //Esta funcion abre un fichero para escritura/reescritura. El parametro es el fichero a abrir, la funcion que se va a cumplir y la accion
   string x;
   vector <string> v;
   while(cin >> x) v.push_back(x);
   return v;
 }
 
-int main(){
+int main() {
   ini = clock();
   v = leer_archivo();
-  OrdHeap();
+  heapSort(v);
   fin = clock();
-  for (int i = 0; i<v.size(); i++)
+  for (int i = 0; i < v.size()-1; ++i)
     cout << v[i] << endl;
   int mil = fin-ini;
   double seg = mil / (double) CLOCKS_PER_SEC;
   double min = seg / 60;
   double hor = min / 60;
-  cout << "\n\nEl tiempo de ejecución es de: " << mil << " Milisegundos." << endl;
-  cout << "El tiempo de ejecución es de: " << seg << " segundos." << endl;
-  cout << "El tiempo de ejecución es de: " << min << " minutos." << endl;
-  cout << "El tiempo de ejecución es de: " << hor << " horas." << endl;
-  cout << "Cantidad de palabras: " << v.size() << endl;
+  cout << "\n\nEl tiempo de ejecución es de: " << mil << " Milisegundos." << endl; //Muestra el tiempo de ejecucion en milisegundos
+  cout << "El tiempo de ejecución es de: " << seg << " segundos." << endl; //Muesra el tiempo de ejecucion en segundos
+  cout << "El tiempo de ejecución es de: " << min << " minutos." << endl; //Muestra el tiempo de ejecucion en minutos
+  cout << "El tiempo de ejecución es de: " << hor << " horas." << endl; //Muestra el tiempo de ejecucion en horas
+  cout << "Cantidad de palabras: " << v.size() << endl; //Muestra la cantidad de palabras ordenadas
   return 0;
 }

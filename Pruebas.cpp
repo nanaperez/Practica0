@@ -1,70 +1,111 @@
-#include<iostream>
-#include<algorithm>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string>
+#include <vector>
 using namespace std;
-int x;
-class heap
-{
-    int a[30],n;// a[30] to store the input
+int ini, fin;
+vector <string> v; 
 
-public:
-    void read()
-    {
-        cout<<"Enter the size\n";
-        cin>>n;
-        x=n;
-        cout<<"Enter the elements\n";
-        for(int i=1;i<=n;i++)cin>>a[i];
-    }
-    void heapsort();
-    void maxd()
-    {
-        swap(a[1],a[n]);   //swap first and last element
-        n--;                      //decrease size of array by 1
-        heapsort();            //call heapsort function
-    }
-    void disp()
-    {
-        cout<<"Sorted Array is\n";
-        for(int i=1;i<=x;i++)
-            cout<<a[i]<<" ";
-        cout<<endl;
-    }
-};
-
-void heap::heapsort()
+void shiftRight(int low, int high)
 {
-    if(n==0)return;
-    int i,k,v,h,j;
-    for(i=n/2;i>0;i--) //we start at i=n/2 as it gives index of right most sub-tree's parent
+    //cout << low << endl;
+    //cout << high << endl;
+    int root = low;
+    while ((root*2)+1 <= high)
     {
-        k=i;
-        v=a[k];        //this assigns the value of parent node of the sub-tree under consideration to variable v
-        h=0;
-        while(!h&&2*k<=n) //checking whether array is heapified
+        
+        int leftChild = (root * 2) + 1;
+        int rightChild = leftChild + 1;
+        int swapIdx = root;
+        /*Check if root is less than left child*/
+        if (v[swapIdx] < v[leftChild])
         {
-            j=2*k;
-            if(j<n)          //checking if given sub-tree has 2 children
-            {
-                if(a[j]<a[j+1])j++;  //variable j points to higher valued node between the 2 children
-            }
-            if (v>=a[j])  //if parent node of the sub-tree is >= to the greater child, no need to heapify
-                h=1;
-            else               //else swap contents of parent and child using variables k and j
-            {
-                a[k]=a[j]; 
-                k=j;
-            }
+            swapIdx = leftChild;
         }
-        a[k]=v;
+        /*If right child exists check if it is less than current root*/
+        if ((rightChild <= high) && (v[swapIdx] < v[rightChild]))
+        {
+            swapIdx = rightChild;
+        }
+        /*Make the biggest element of root, left and right child the root*/
+        if (swapIdx != root)
+        {
+            string tmp = v[root];
+            v[root] = v[swapIdx];
+            v[swapIdx] = tmp;
+
+            //cout << "tmp1 " << tmp << endl;
+            //cout << "v[root]2 " << v[root] << endl;
+            //cout << "v[swapIdx]3 " << v[swapIdx] << endl;
+            /*Keep shifting right and ensure that swapIdx satisfies
+            heap property aka left and right child of it is smaller than
+            itself*/
+            root = swapIdx;
+        }
+        else
+        {
+            break;
+        }
     }
-    maxd();
+    return;
 }
 
-int main()
+
+void heapify(int low, int high)
 {
-    heap H;//object created
-    H.read();//read function to read input//leerarchivo()
-    H.heapsort();//to perform heapsort
-    H.disp();//to display sorted array
+    cout << "heapify" << endl;
+    /*Start with middle element. Middle element is chosen in
+    such a way that the last element of array is either its
+    left child or right child*/
+    int midIdx = (high - low -1)/2;
+    //cout << low << endl;
+    //cout << high << endl;
+    //cout << midIdx << endl;
+    while (midIdx >= 0)
+    {
+        //cout << midIdx << endl;
+        //cout << high << endl;
+        shiftRight(midIdx, high);
+        --midIdx;
+    }
+    return;
+}
+
+vector <string> leer_archivo()
+{
+  freopen("1.txt","r",stdin);
+  string x;
+  vector <string> v;
+  while(cin >> x) v.push_back(x);
+  return v;
+}
+
+void heapSort()
+{
+    cout << "heapsort" << endl;
+    //cout << v.size()-1 << endl;
+    heapify(0, v.size()-1);
+    int high = v.size() - 1;
+    while (high > 0)
+    {
+        /*Swap max element with high index in the array*/
+        string tmp = v[high];
+        v[high] = v[0];
+        v[0] = tmp;
+        --high;
+        /*Ensure heap property on remaining elements*/
+        shiftRight(0, v.size()-1);
+    }
+    return;
+}
+
+int main(){
+    cout << "Empezando" << endl;
+     v = leer_archivo();
+     heapSort();
+     for (int i = 0; i<v.size(); i++)
+        cout << v[i] << endl;
     return 0;
 }
