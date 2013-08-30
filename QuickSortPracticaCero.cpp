@@ -11,7 +11,7 @@ int ini, fin; //Variables para el inicio y fin del reloj
 vector <string> v; //Funcion vector creada para recibir los archivos a ordenar
 
 
-int divide(int start, int end) // Función para dividir el vector y hacer los intercambios respectivos
+int dividir(int start, int end) // Función para dividir el vector y hacer los intercambios respectivos
 {
     int left;
     int right;
@@ -42,7 +42,7 @@ int divide(int start, int end) // Función para dividir el vector y hacer los in
         }
     }
  
-    // Si ya se han cruzado, ponemos el pivot en el lugar que le corresponde
+    // Si ya se han cruzado, ponemos el pivote en el lugar que le corresponde
     tmp = v[right];
     v[right] = v[start];
     v[start] = tmp;
@@ -59,12 +59,12 @@ void OrdQuick(int start, int end) // Funcion recursivo que se encarga de ordenar
 
     if (start < end) // Condicional
     {
-      pivot = divide(start, end);
+      pivot = dividir(start, end);
     }
 
     if (start < end) // Condicional
     {
-        pivot = divide(start, end);
+        pivot = dividir(start, end);
 
         // Ordeno la lista de los menores
         OrdQuick(start, pivot);
