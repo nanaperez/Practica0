@@ -1,4 +1,4 @@
-#include <iostream> //Provee los elementos fundamentales para la entrada y salida en C++, es decir su inicializacion
+﻿#include <iostream> //Provee los elementos fundamentales para la entrada y salida en C++, es decir su inicializacion
 #include <stdio.h> //Libreria que contiene tipos, macros y funciones para la realización de las diferentes tareas
 #include <stdlib.h> //Libreria que contiene tipos, macros y funciones para la conversión numérica, generación de números aleatorios, búsquedas y ordenación, gestión de memoria y similares
 #include <time.h> //Libreria que contiene tipos, macros y funciones para la la manipulación de información sobre tiempos
@@ -7,7 +7,7 @@
 #include <sstream> //Flujos hacia/desde cadenas alfanuméricas
 #include <cstring> //Define funciones para manipular strings y arreglos
 using namespace std; //Espacios de nombres, es decir, nombres de funciones 
-int ini, fin; //Variables para el inicio y fin del reloj
+int ini, fin; //Variables para el inicio y fin del reloj.
 vector <string> v; //Funcion vector creada para recibir los archivos a ordenar
 
 
